@@ -30,6 +30,7 @@
             return humanChoice
         } else {
             alert("Your answer is weird. Try again!")
+            return getHumanChoice()
         }
     }
 
@@ -42,16 +43,31 @@
             let humanSelection = getHumanChoice()
             if (computerSelection === humanSelection) {
                 console.log("No one wins. Fair fight!");
-            } else if (computerSelection === "rock" && humanSelection === "paper" ||
-                        computerSelection === "scissors" && humanSelection === "rock" ||
-                        computerSelection === "paper" && humanSelection === "scissors") {
-                console.log("You win, you rock-paper-scissors genius!");
+                console.log("Score : Computer = " + computerScore +" / You = " + humanScore);
+            } else if (computerSelection === "rock" && humanSelection === "paper") {
+                console.log("Computer chose rock, you chose paper. You win, you rock-paper-scissors genius!");
                 humanScore++;
-                console.log(humanScore)
-            } else {
-                console.log("You lose, you looser...");
+                console.log("Score : Computer = " + computerScore +" / You = " + humanScore)
+            } else if (computerSelection === "scissors" && humanSelection === "rock") {
+                console.log("Computer chose scissors, you chose rock. You win, you rock-paper-scissors genius!");
+                humanScore++;
+                console.log("Score : Computer = " + computerScore +" / You = " + humanScore)
+            } else if(computerSelection === "paper" && humanSelection === "scissors") {
+                console.log("Computer chose paper, you chose scissors. You win, you rock-paper-scissors genius!");
+                humanScore++;
+                console.log("Score : Computer = " + computerScore +" / You = " + humanScore)
+            } else if(computerSelection === "paper" && humanSelection === "rock"){
+                console.log("Computer chose paper, you chose rock. You lose, get yourself together!");
                 computerScore++;
-                console.log(computerScore)
+                console.log("Score : Computer = " + computerScore +" / You = " + humanScore)
+            } else if(computerSelection === "rock" && humanSelection === "scissors"){
+                console.log("Computer chose rock, you chose scissors. You lose, get yourself together!");
+                computerScore++;
+                console.log("Score : Computer = " + computerScore +" / You = " + humanScore)
+            } else if(computerSelection === "scissors" && humanSelection === "paper"){
+                console.log("Computer chose scissors, you chose paper. You lose, get yourself together!");
+                computerScore++;
+                console.log("Score : Computer = " + computerScore +" / You = " + humanScore);
             }
         }
 
