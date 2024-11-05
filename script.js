@@ -10,69 +10,77 @@ function getComputerChoice() {
         computerChoice = "scissors";
     }
     return computerChoice;
-}
+};
 
-function getHumanChoice() {
-    let humanAnswer = prompt("Choose your weapon: rock, paper or scissors?")
-    let humanChoice = humanAnswer.toLowerCase();
-    if (humanChoice === "rock" || 
-        humanChoice === "paper" || 
-        humanChoice === "scissors") {
-        return humanChoice
-    } else {
-        alert("Your answer is weird. Try again!")
-        return getHumanChoice()
-    }
-}
+
+let humanScore = 0;
+let computerScore = 0;
+let humanSelection = "";
+let result = document.querySelector("#result");
+let score = document.querySelector("#score");
+score.style.cssText = "font-style: italic;";
 
 function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
+    const buttons = document.querySelectorAll("button");
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            humanSelection = button.id;
+            playRound()
+            
+            if(humanScore == 3){
+                result.style.cssText = "color: green; font-weight: bold;";
+                result.textContent = "You reached 3 points, YOU WIN!";
+                humanScore = 0;
+                computerScore = 0;
+            } else if (computerScore == 3){
+                result.style.cssText = "color: red; font-weight: bold;";
+                result.textContent = "The computer got 3 points, YOU LOSE!";
+                computerScore = 0;
+                humanScore = 0;
+            }
+        });
+    });
 
     function playRound() {
         let computerSelection = getComputerChoice();
-        let humanSelection = getHumanChoice()
+        result.style.cssText = "color: black; font-weight: 400;";
+
         if (computerSelection === humanSelection) {
-            console.log("No one wins. Fair fight!");
-            console.log("Score : Computer = " + computerScore +" / You = " + humanScore);
+            result.textContent = "No one wins. Fair fight!";
+            score.textContent = "Score : Computer = " + computerScore +" / You = " + humanScore;
         } else if (computerSelection === "rock" && humanSelection === "paper") {
-            console.log("Computer chose rock, you chose paper. You win, you rock-paper-scissors genius!");
+            result.textContent = "Computer chose rock, you chose paper. You win, you rock-paper-scissors genius!";
             humanScore++;
-            console.log("Score : Computer = " + computerScore +" / You = " + humanScore)
+            score.textContent = "Score : Computer = " + computerScore +" / You = " + humanScore;
         } else if (computerSelection === "scissors" && humanSelection === "rock") {
-            console.log("Computer chose scissors, you chose rock. You win, you rock-paper-scissors genius!");
+            result.textContent = "Computer chose scissors, you chose rock. You win, you rock-paper-scissors genius!";
             humanScore++;
-            console.log("Score : Computer = " + computerScore +" / You = " + humanScore)
+            score.textContent = "Score : Computer = " + computerScore +" / You = " + humanScore;
         } else if(computerSelection === "paper" && humanSelection === "scissors") {
-            console.log("Computer chose paper, you chose scissors. You win, you rock-paper-scissors genius!");
+            result.textContent = "Computer chose paper, you chose scissors. You win, you rock-paper-scissors genius!";
             humanScore++;
-            console.log("Score : Computer = " + computerScore +" / You = " + humanScore)
+            score.textContent = "Score : Computer = " + computerScore +" / You = " + humanScore;
         } else if(computerSelection === "paper" && humanSelection === "rock"){
-            console.log("Computer chose paper, you chose rock. You lose, get yourself together!");
+            result.textContent = "Computer chose paper, you chose rock. You lose, get yourself together!";
             computerScore++;
-            console.log("Score : Computer = " + computerScore +" / You = " + humanScore)
+            score.textContent = "Score : Computer = " + computerScore +" / You = " + humanScore;
         } else if(computerSelection === "rock" && humanSelection === "scissors"){
-            console.log("Computer chose rock, you chose scissors. You lose, get yourself together!");
+            result.textContent = "Computer chose rock, you chose scissors. You lose, get yourself together!";
             computerScore++;
-            console.log("Score : Computer = " + computerScore +" / You = " + humanScore)
+            score.textContent = "Score : Computer = " + computerScore +" / You = " + humanScore;
         } else if(computerSelection === "scissors" && humanSelection === "paper"){
-            console.log("Computer chose scissors, you chose paper. You lose, get yourself together!");
+            result.textContent = "Computer chose scissors, you chose paper. You lose, get yourself together!";
             computerScore++;
-            console.log("Score : Computer = " + computerScore +" / You = " + humanScore);
+            score.textContent = "Score : Computer = " + computerScore +" / You = " + humanScore;
         }
     }
 
-    for(let i = 0; i < 3; i++) {
+    /*for(let i = 0; i < 3; i++) {
         playRound();
-    }
+    }*/
 
-    if (humanScore > computerScore) {
-        console.log("You WIN!");
-    } else if (computerScore > humanScore) {
-        console.log("You LOSE!");
-    } else {
-        console.log("Well, fair fight. You're all the same to me.");
-    }
+
 }
 
 playGame()
